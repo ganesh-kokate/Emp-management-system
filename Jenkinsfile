@@ -31,5 +31,28 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy') {
+            steps {
+                bat '''
+                if not exist C:\\deploy mkdir C:\\deploy
+                copy /Y empbackend\\target\\*.jar C:\\deploy\\employee-service.jar
+                '''
+            }
+        }
+
+        stage('Start Application') {
+            steps {
+                bat '''
+                start "" java -jar C:\\deploy\\employee-service.jar --server.port=8081
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            archiveArtifacts artifacts: 'empbackend/target/*.jar', fingerprint: true
+        }
     }
 }
