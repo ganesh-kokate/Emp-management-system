@@ -31,7 +31,19 @@ pipeline {
                 }
             }
         }
-
+        stage('Approval') {
+        steps {
+            script {
+                try {
+                    input message: 'Deploy to Production?', ok: 'Deploy'
+                } catch (err) {
+                    echo "Deployment was rejected."
+                    currentBuild.result = 'ABORTED'
+                    error("Deployment aborted by user.")
+                }
+            }
+    }
+}
         stage('Deploy') {
             steps {
                 bat '''
