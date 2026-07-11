@@ -36,7 +36,7 @@ pipeline {
             steps {
                 bat '''
                 if not exist C:\\deploy mkdir C:\\deploy
-                copy /Y empbackend\\target\\employee-service-0.0.1-SNAPSHOT.jar C:\\deploy\\employee-service.jar
+                copy /Y empbackend\\target\\empbackend-0.0.1-SNAPSHOT.jar C:\\deploy\\employee-service.jar
                 '''
             }
         }
