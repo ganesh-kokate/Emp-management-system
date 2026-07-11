@@ -1,2 +1,2 @@
 # Emp-management-system
-practice project to learn Angular
+practice project to learn Angular.
